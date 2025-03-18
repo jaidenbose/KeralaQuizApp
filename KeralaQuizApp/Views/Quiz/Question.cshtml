@@ -1,0 +1,56 @@
+﻿@model KeralaQuizApp.Models.Question
+
+@{
+    ViewBag.Title = "Quiz";
+}
+
+<style>
+    .question-text {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .option-text {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 10px;
+        margin: 5px;
+    }
+</style>
+
+<h2>Question @((ViewBag.CurrentIndex + 1)) of @ViewBag.TotalQuestions</h2>
+<p class="question-text">@Model.Text</p>
+
+<form method="post">
+    <label>
+        <input type="radio" name="selectedAnswer" value="0" @(ViewBag.SelectedAnswer == 0 ? "checked" : "") required /> @Model.Option1
+    </label><br />
+    <label>
+        <input type="radio" name="selectedAnswer" value="1" @(ViewBag.SelectedAnswer == 1 ? "checked" : "") required /> @Model.Option2
+    </label><br />
+    <label>
+        <input type="radio" name="selectedAnswer" value="2" @(ViewBag.SelectedAnswer == 2 ? "checked" : "") required /> @Model.Option3
+    </label><br />
+    <label>
+        <input type="radio" name="selectedAnswer" value="3" @(ViewBag.SelectedAnswer == 3 ? "checked" : "") required /> @Model.Option4
+    </label><br />
+
+    <br />
+
+    @if (ViewBag.CurrentIndex > 0)
+    {
+        <button type="submit" name="action" value="Previous">Previous</button>
+    }
+
+    @if (ViewBag.CurrentIndex < ViewBag.TotalQuestions - 1)
+    {
+        <button type="submit" name="action" value="Next">Next</button>
+    }
+    else
+    {
+        <button type="submit" name="action" value="Submit">Submit</button>
+    }
+</form>
